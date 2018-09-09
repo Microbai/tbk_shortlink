@@ -65,6 +65,10 @@ const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 
     console.log(shortLinkCtn);
     await page.click('.dialog-ext-close-x');
     await page.waitFor(1000);
+    const txta = await page.$('textarea');
+    await page.evaluate(x => {
+      x.value = "";
+    }, txta); 
     await page.type('textarea',`https://detail.tmall.com/item.htm?spm=a1z10.4-b-s.w5003-18859323010.2.86c22b29KvpO6G&id=575885034633&scene=taobao_shop`);
     await page.click('.btn.btn-size25.btn-blue');
     await page.waitFor(1000);
@@ -74,6 +78,9 @@ const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 
     shortLinkCtn = await page.evaluate(e => {return e.innerHTML;}, shortLink);
     console.log(shortLinkCtn);
     await page.click('.dialog-ext-close-x');
+    await page.evaluate(x => {
+      x.value = "";
+    }, txta); 
     
   }
   await page.screenshot({path: 'example.png'});//截个图
